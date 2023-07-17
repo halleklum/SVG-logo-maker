@@ -8,6 +8,7 @@ const questions = [
         type: "input",
         name: "text",
         message: "What do you want the text to be? Enter 1-3 characters",
+        validate: (text) => text.length <= 3 || "Must be between 1-3 characters"
     }, {
         type: "input",
         name: "text-color",
@@ -42,17 +43,13 @@ class Svg{
 }
 
 function writeFile(fileName, data) {
-    //checking for error in user input
-    if (answers.text.length > 3) {
-        console.log("Please enter 1-3 characters");
-    } else {
-    fs.writeToFile(fileName, data, function (err) {
+    fs.writeFile(fileName, data, function (err) {
         if (err) {
             return console.log(err);
         }
         console.log("Your logo has been created");
     });
-}}
+}
 
 async function init() {
 	var svgString = "";
@@ -66,16 +63,16 @@ async function init() {
     chosenShapeColor = answers["shape-color"];
 
     let userShape;
-	if (userChosenShape === "Square" || userChosenShape === "square") {
+	if (chosenShapeType === "Square" || chosenShapeType === "square") {
 		userShape = new Square();
 	}
-	else if (userChosenShape === "Circle" || userChosenShape === "circle") {
+	else if (chosenShapeType === "Circle" || chosenShapeType === "circle") {
 		userShape = new Circle();
 	}
-	else if (userChosenShape === "Triangle" || userChosenShape === "triangle") {
+	else if (chosenShapeType === "Triangle" || chosenShapeType === "triangle") {
 		userShape = new Triangle();
 	}
-    user_shape.setColor(shapeColor);
+    userShape.setColor(chosenShapeType);
 
     // Adding shape and text to new svg instance
     var svg = new Svg();
