@@ -31,10 +31,15 @@ class Svg{
         this.shapeInput = ''
     }
     render(){
-        return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.shapeInput}${this.textInput}</svg>`
+        // return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">${this.shapeInput}${this.textInput}</svg>`
+        return `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="300" height="200">
+        ${this.shapeInput}${this.textInput}
+        </svg>`
+
     }
     setTextElement(text,color){
-        this.textInput = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">${text}</text>`
+        // this.textInput = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">${text}</text>`
+        this.textInput = `<text x="150" y="125" font-size="60" text-anchor="middle" fill="${color}">svg</text>`
     }
     setShapeElement(shape){
         this.shapeInput = shape.render()
@@ -72,7 +77,7 @@ async function init() {
 	else if (chosenShapeType === "Triangle" || chosenShapeType === "triangle") {
 		userShape = new Triangle();
 	}
-    userShape.setColor(chosenShapeType);
+    userShape.setColor(chosenShapeColor);
 
     // Adding shape and text to new svg instance
     var svg = new Svg();
